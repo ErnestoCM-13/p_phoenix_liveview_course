@@ -44,6 +44,7 @@ defmodule PPhoenixLiveviewCourseWeb.GameLive.FormComponent do
   @impl true
   def handle_event("validate", %{"game" => game_params}, socket) do
     changeset = Catalog.change_game(socket.assigns.game, game_params)
+    IO.inspect(changeset, label: "Before converting into form 👉")
     {:noreply, assign(socket, form: to_form(changeset, action: :validate))}
   end
 
