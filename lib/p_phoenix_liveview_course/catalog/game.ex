@@ -1,6 +1,7 @@
 defmodule PPhoenixLiveviewCourse.Catalog.Game do
   use Ecto.Schema
   import Ecto.Changeset
+  alias PPhoenixLiveviewCourse.Rating.Tomatoes
 
   schema "games" do
     field :name, :string
@@ -8,6 +9,7 @@ defmodule PPhoenixLiveviewCourse.Catalog.Game do
     field :unit_price, :float
     field :sku, :integer
     field(:image_upload, :string)
+    has_one :tomatoes, Tomatoes
 
     timestamps(type: :utc_datetime)
   end
