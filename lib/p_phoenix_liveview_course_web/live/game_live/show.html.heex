@@ -17,7 +17,7 @@
     <img src={@game.image_upload} alt="Game Image" width="300" />
   </:item>
   <:item title="Tomatoes Rating">
-    <div>
+    <div class="flex justify-center items-center gap-4">
       <GameComponent.tomatoe_button
         type={:good}
         count={@tomatoes.good}
@@ -30,6 +30,7 @@
         game_id={@game.id}
         on_tomatoe="on_tomatoe"
       />
+      <GameComponent.tomatoes_score good={@tomatoes.good} bad={@tomatoes.bad} />
     </div>
   </:item>
 </.list>

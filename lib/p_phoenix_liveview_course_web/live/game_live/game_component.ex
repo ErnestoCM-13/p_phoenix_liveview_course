@@ -16,8 +16,26 @@ defmodule PPhoenixLiveviewCourseWeb.GameLive.GameComponent do
       class="p-2 border"
     >
       <span>{@count}</span>
-      <span>{if @type == :good, do: "🍎", else: "🍏"}</span>
+      <span>{if @type == :good, do: "🍏", else: "🍎"}</span>
     </button>
+    """
+  end
+
+  attr :good, :integer, default: 0
+  attr :bad, :integer, default: 0
+
+  def tomatoes_score(assigns) do
+    total = assigns.good + assigns.bad
+
+    assigns =
+      Map.put(assigns, :good_percentage, Float.round(assigns.good / total * 100, 1))
+      |> Map.put(:bad_percentage, Float.round(assigns.bad / total * 100, 1))
+
+    ~H"""
+    <div class="flex justify-center items-center gap-4">
+      <span class="text-green-700 text-xl">{assigns.good_percentage}%</span>
+      <span class="text-red-600 text-xl">{assigns.bad_percentage}%</span>
+    </div>
     """
   end
 end
