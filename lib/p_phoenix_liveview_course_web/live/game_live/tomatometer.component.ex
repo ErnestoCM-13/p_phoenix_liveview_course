@@ -21,8 +21,10 @@ defmodule PPhoenixLiveviewCourseWeb.GameLive.Tomatometer do
       nil ->
         {:noreply, assign_new_tomatoes(socket, type, new_count)}
 
-      _error ->
-        {:noreply, socket |> put_flash(:error, "Cannot get tomatoes info")}
+      error ->
+        send(self(), {:flash, :error, "Cannot get tomatoes info"})
+
+        {:noreply, socket}
     end
   end
 
@@ -54,9 +56,10 @@ defmodule PPhoenixLiveviewCourseWeb.GameLive.Tomatometer do
         socket |> assign(:tomatoes, tomatoes)
 
       _error ->
+        send(self(), {:flash, :error, "Cannot get tomatoes info"})
+
         socket
         |> assign(:tomatoes, %{bad: 0, good: 0})
-        |> put_flash(:error, "Cannot get tomatoes info")
     end
   end
 
@@ -76,10 +79,8 @@ defmodule PPhoenixLiveviewCourseWeb.GameLive.Tomatometer do
         socket |> assign(:tomatoes, tomatoes)
 
       error ->
-        IO.inspect(error)
-
+        send(self(), {:flash, :error, "Cannot create tomatoes info"})
         socket
-        |> put_flash(:error, "Cannot get tomatoes info")
     end
   end
 
@@ -89,7 +90,8 @@ defmodule PPhoenixLiveviewCourseWeb.GameLive.Tomatometer do
         socket |> assign(:tomatoes, updated_tomatoes)
 
       _error ->
-        socket |> put_flash(:error, "Cannot update tomatoes info")
+        send(self(), {:flash, :error, "Cannot update tomatoes info"})
+        socket
     end
   end
 end

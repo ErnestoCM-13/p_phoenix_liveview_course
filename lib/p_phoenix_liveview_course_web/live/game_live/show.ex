@@ -17,6 +17,11 @@ defmodule PPhoenixLiveviewCourseWeb.GameLive.Show do
      |> assign(:game, Catalog.get_game!(id))}
   end
 
+  @impl true
+  def handle_info({:flash, type, message}, socket) do
+    {:noreply, socket |> put_flash(type, message)}
+  end
+
   defp page_title(:show), do: "Show Game"
   defp page_title(:edit), do: "Edit Game"
 end

@@ -39,6 +39,11 @@ defmodule PPhoenixLiveviewCourseWeb.GameLive.Index do
   end
 
   @impl true
+  def handle_info({:flash, type, message}, socket) do
+    {:noreply, socket |> put_flash(type, message)}
+  end
+
+  @impl true
   def handle_event("delete", %{"id" => id}, socket) do
     game = Catalog.get_game!(id)
     {:ok, _} = Catalog.delete_game(game)
