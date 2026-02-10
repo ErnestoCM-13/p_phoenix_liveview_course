@@ -17,21 +17,7 @@
     <img src={@game.image_upload} alt="Game Image" width="300" />
   </:item>
   <:item title="Tomatoes Rating">
-    <div class="flex justify-center items-center gap-4">
-      <GameComponent.tomatoe_button
-        type={:good}
-        count={@tomatoes.good}
-        game_id={@game.id}
-        on_tomatoe="on_tomatoe"
-      />
-      <GameComponent.tomatoe_button
-        type={:bad}
-        count={@tomatoes.bad}
-        game_id={@game.id}
-        on_tomatoe="on_tomatoe"
-      />
-      <GameComponent.tomatoes_score good={@tomatoes.good} bad={@tomatoes.bad} />
-    </div>
+    <.live_component module={Tomatometer} id={"tomatometer-#{@game.id}"} />
   </:item>
 </.list>
 
