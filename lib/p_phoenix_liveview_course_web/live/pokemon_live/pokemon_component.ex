@@ -3,6 +3,7 @@ defmodule PPhoenixLiveviewCourseWeb.PokemonLive.PokemonComponent do
 
   attr :pokemon, :map, required: true
   attr :player, :string, default: ""
+  attr :id, :string, default: ""
 
   def pokemon_card(assigns) do
     assigns =
@@ -17,7 +18,13 @@ defmodule PPhoenixLiveviewCourseWeb.PokemonLive.PokemonComponent do
       )
 
     ~H"""
-    <div class="pokemon-card" role="button" phx-click="choose_pokemon" phx-value-id={@pokemon.id}>
+    <div
+      class="pokemon-card"
+      role="button"
+      phx-click="choose_pokemon"
+      phx-value-id={@pokemon.id}
+      id={@id}
+    >
       <strong>{@player}</strong>
       <img src={@pokemon.image_url} alt={@pokemon.name} />
       <h2>{@pokemon.name}</h2>

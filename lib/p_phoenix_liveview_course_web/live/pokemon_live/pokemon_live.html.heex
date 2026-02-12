@@ -5,19 +5,26 @@
     <PokemonComponent.pokemon_card :for={pokemon <- @pokemons} pokemon={pokemon} />
   </div>
 
-  <h2>Battle battling</h2>
-  <div class="pokemon-battle">
-    <PokemonComponent.pokemon_card :if={@p1_pokemon} pokemon={@p1_pokemon} player="Player 1" />
+  <h2 :if={@p1_pokemon && @p2_pokemon}>Battle battling</h2>
+  <div
+    :if={@p1_pokemon && @p2_pokemon}
+    class="pokemon-battle"
+    name={if @winner |> elem(0) == :draw, do: "draw_battle"}
+  >
+    <PokemonComponent.pokemon_card pokemon={@p1_pokemon} player="Player 1" id="p1-pokemon" />
 
-    <PokemonComponent.pokemon_card :if={@p2_pokemon} pokemon={@p2_pokemon} player="Player 2" />
+    <PokemonComponent.pokemon_card pokemon={@p2_pokemon} player="Player 2" id="p2-pokemon" />
   </div>
 
-  <h2>Battle results:</h2>
-  <div class="pokemon-battle">
-    <PokemonComponent.pokemon_card
-      :if={@winner}
-      pokemon={elem(@winner, 1)}
-      player={if elem(@winner, 0) == :p1, do: "Player 1", else: "Player 2"}
-    />
-  </div>
+  <button
+    :if={@p1_pokemon && @p2_pokemon}
+    class="battle-button"
+    phx-click={
+      JS.toggle_class("winner-animation", to: winner_id(@winner))
+      |> JS.hide(transition: "loser-animation", to: loser_id(@winner), time: 1500)
+      |> JS.toggle_class("draw-animation", to: "[name='draw_battle']")
+    }
+  >
+    Battle
+  </button>
 </section>

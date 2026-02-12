@@ -64,4 +64,20 @@ defmodule PPhoenixLiveviewCourseWeb.PokemonLive do
       true -> {:p2, p2_pokemon}
     end
   end
+
+  defp winner_id(winner) do
+    case winner do
+      {:p1, _} -> "#p1-pokemon"
+      {:p2, _} -> "#p2-pokemon"
+      _ -> "#dummy"
+    end
+  end
+
+  defp loser_id(winner) do
+    case winner do
+      {:p1, _} -> "#p2-pokemon"
+      {:p2, _} -> "#p1-pokemon"
+      _ -> "#dummy"
+    end
+  end
 end
