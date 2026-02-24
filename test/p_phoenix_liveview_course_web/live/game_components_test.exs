@@ -1,8 +1,6 @@
 defmodule PPhoenixLiveviewCourseWeb.GameComponentsTest do
   use PPhoenixLiveviewCourseWeb.ConnCase
   alias PPhoenixLiveviewCourseWeb.GameLive.GameComponent
-  import Phoenix.LiveViewTest
-  import Phoenix.Component
 
   describe "GameComponent.tomatoe_button" do
     test "should render the right template" do
